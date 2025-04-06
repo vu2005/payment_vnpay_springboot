@@ -1,0 +1,4 @@
+Số thẻ: 9704198526191432198
+Tên: NGUYEN VAN A
+Ngày phát hành: 07/15
+OTP: 123456
