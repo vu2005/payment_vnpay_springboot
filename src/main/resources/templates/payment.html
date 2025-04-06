@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán VNPAY</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            max-width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .result.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .result h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Thanh toán qua VNPAY</h2>
+    <form action="/payment/create" method="post">
+        <label>Số tiền (VND):</label>
+        <input type="number" name="amount" required min="10000" placeholder="Nhập số tiền">
+        <input type="submit" value="Thanh toán">
+    </form>
+
+    <div th:if="${message}" class="result" th:classappend="${message.contains('thành công') ? 'success' : 'error'}">
+        <h3 th:text="${message}"></h3>
+        <p th:if="${txnRef}">Mã giao dịch: <span th:text="${txnRef}"></span></p>
+        <p th:if="${amount}">Số tiền: <span th:text="${amount} + ' VND'"></span></p>
+    </div>
+</div>
+</body>
+</html>
